@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioQuest — Learn • Explore • Level Up</title>
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='images/bioquest_logo.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="login-page">
+    <nav class="language-switcher" aria-label="Language selector">
+        <span class="language-label" data-i18n="language">LANGUAGE</span>
+        <button class="language-btn active" type="button" data-lang="en">EN</button>
+        <button class="language-btn" type="button" data-lang="ar">العربية</button>
+        <button class="language-btn" type="button" data-lang="es">ES</button>
+    </nav>
+    <div class="login-orbit orbit-one"></div>
+    <div class="login-orbit orbit-two"></div>
+    <div class="login-orbit orbit-three"></div>
+
+    <div class="bio-particle particle-one">🧬</div>
+    <div class="bio-particle particle-two">🔬</div>
+    <div class="bio-particle particle-three">🧪</div>
+    <div class="bio-particle particle-four">🧫</div>
+
+    <main class="login-scene">
+        <div class="quote-field" aria-hidden="true">
+            <div class="quote quote-1" data-quote-key="q1">“The more you explore life, the more fascinating it becomes.”</div>
+            <div class="quote quote-2" data-quote-key="q2">“Every cell has a story worth discovering.”</div>
+            <div class="quote quote-3" data-quote-key="q3">“Curiosity is the first step to understanding biology.”</div>
+            <div class="quote quote-4" data-quote-key="q4">“Learn. Explore. Discover.”</div>
+            <div class="quote quote-5" data-quote-key="q5">“Science begins with a question.”</div>
+            <div class="quote quote-6" data-quote-key="q6">“Your next discovery starts here.”</div>
+        </div>
+
+        <section class="login-card bioquest-login-card">
+            <div class="brand-logo-wrap" aria-label="BioQuest logo">
+                <div class="brand-ring"></div>
+                <img
+                    class="bioquest-logo"
+                    src="{{ url_for('static', filename='images/bioquest_logo.jpg') }}"
+                    alt="BioQuest"
+                >
+            </div>
+
+            <div class="brand-title-row">
+                <span class="brand-line"></span>
+                <span class="brand-mini" data-i18n="biologyLearning">BIOLOGY LEARNING</span>
+                <span class="brand-line"></span>
+            </div>
+
+            <h1 class="bioquest-title">Bio<span>Quest</span></h1>
+            <p class="bioquest-tagline" data-i18n="tagline">Learn • Explore • Level Up</p>
+            <p class="subtitle bioquest-subtitle" data-i18n="subtitle">Your next biology challenge is waiting.</p>
+
+            {% if error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+                <div class="field-group">
+                    <label for="username" data-i18n="usernameLabel">Username</label>
+                    <div class="input-shell">
+                        <span class="input-icon">👤</span>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username" data-i18n-placeholder="usernamePlaceholder"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="password" data-i18n="passwordLabel">Password</label>
+                    <div class="input-shell password-shell">
+                        <span class="input-icon">🔐</span>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password" data-i18n-placeholder="passwordPlaceholder"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button type="button" id="showPassword" aria-label="Show password" data-i18n-aria="showPassword">👁</button>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <label class="remember">
+                        <input type="checkbox" id="rememberMe">
+                        <span data-i18n="remember">Remember me</span>
+                    </label>
+                    <span class="quest-status" data-i18n="ready">🧬 Ready to learn</span>
+                </div>
+
+                <button class="login-btn bioquest-login-btn" type="submit">
+                    <span data-i18n="enterBioquest">Enter BioQuest</span>
+                    <strong>→</strong>
+                </button>
+            </form>
+
+            <div class="login-bottom-line">
+                <span></span>
+                <p data-i18n="teacherNote">Your teacher will provide your username and password.</p>
+                <span></span>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

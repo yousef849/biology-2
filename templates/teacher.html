@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioQuest | Teacher Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .teacher-page { min-height:100vh; background: radial-gradient(circle at 10% 10%, rgba(56,189,248,.16), transparent 32%), radial-gradient(circle at 90% 80%, rgba(139,92,246,.16), transparent 30%), #07111f; color:#eef7ff; padding:32px; }
+        .teacher-wrap { max-width:1250px; margin:0 auto; }
+        .teacher-top { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:28px; }
+        .teacher-brand { display:flex; align-items:center; gap:14px; }
+        .teacher-brand img { width:58px; height:58px; border-radius:16px; object-fit:cover; box-shadow:0 0 28px rgba(56,189,248,.25); }
+        .teacher-brand h1 { margin:0; font-size:30px; }
+        .teacher-brand p { margin:4px 0 0; opacity:.7; }
+        .teacher-actions { display:flex; align-items:center; gap:12px; }
+        .teacher-user { padding:11px 16px; border:1px solid rgba(255,255,255,.12); border-radius:999px; background:rgba(255,255,255,.06); }
+        .teacher-logout { color:#fff; text-decoration:none; padding:11px 16px; border-radius:999px; background:rgba(239,68,68,.16); border:1px solid rgba(239,68,68,.3); }
+        .teacher-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:24px; }
+        .teacher-stat, .teacher-panel { background:rgba(10,24,42,.78); border:1px solid rgba(125,211,252,.14); box-shadow:0 18px 45px rgba(0,0,0,.18); border-radius:22px; }
+        .teacher-stat { padding:22px; }
+        .teacher-stat span { display:block; opacity:.68; font-size:14px; }
+        .teacher-stat strong { display:block; margin-top:7px; font-size:30px; }
+        .teacher-panel { padding:24px; margin-bottom:24px; overflow:hidden; }
+        .teacher-panel h2 { margin:0 0 18px; font-size:21px; }
+        .teacher-table { width:100%; border-collapse:collapse; }
+        .teacher-table th, .teacher-table td { padding:14px 12px; text-align:left; border-bottom:1px solid rgba(255,255,255,.08); }
+        .teacher-table th { color:#8bdcff; font-size:13px; text-transform:uppercase; letter-spacing:.05em; }
+        .progress-track { width:130px; height:8px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; display:inline-block; vertical-align:middle; margin-right:8px; }
+        .progress-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#22d3ee,#8b5cf6); }
+        .grade-badge { display:inline-block; padding:5px 9px; border-radius:999px; background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.2); }
+        .feedback-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+        .feedback-item { padding:15px; border-radius:16px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.07); }
+        .feedback-item strong { display:block; margin-bottom:5px; }
+        .empty { opacity:.6; padding:15px 0; }
+        @media (max-width:800px) { .teacher-page{padding:18px}.teacher-top{align-items:flex-start;flex-direction:column}.teacher-stats{grid-template-columns:1fr}.teacher-panel{overflow-x:auto}.teacher-table{min-width:720px} }
+
+        .teacher-language-switcher { position:fixed; bottom:22px; right:26px; z-index:100; display:flex; align-items:center; gap:4px; padding:6px; border:1px solid rgba(122,240,191,.30); border-radius:999px; background:linear-gradient(135deg,rgba(7,20,38,.94),rgba(13,35,53,.90)); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); box-shadow:0 14px 35px rgba(0,0,0,.30),0 0 24px rgba(69,216,255,.08),inset 0 0 18px rgba(80,190,255,.05); animation:teacherLanguageFloat 4s ease-in-out infinite; }
+        .teacher-language-switcher::before { content:""; position:absolute; inset:-2px; border-radius:inherit; padding:1px; background:linear-gradient(120deg,rgba(157,255,79,.65),rgba(69,216,255,.65),rgba(157,255,79,.35)); -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; opacity:.55; }
+        .teacher-language-label { color:rgba(255,255,255,.80); font-size:11px; font-weight:900; letter-spacing:.04em; padding:0 7px 0 9px; white-space:nowrap; }
+        .teacher-language-btn { border:1px solid transparent; background:transparent; color:rgba(255,255,255,.72); border-radius:999px; padding:7px 11px; font-weight:900; font-size:11px; cursor:pointer; transition:transform .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease; }
+        .teacher-language-btn:hover { transform:translateY(-3px) scale(1.06); color:white; background:rgba(255,255,255,.10); box-shadow:0 7px 16px rgba(0,0,0,.18); }
+        .teacher-language-btn.active { color:#071525; background:linear-gradient(135deg,#9dff4f,#45d8ff); box-shadow:0 0 20px rgba(69,216,255,.30),0 5px 14px rgba(0,0,0,.22); }
+        @keyframes teacherLanguageFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+        [dir="rtl"] .teacher-language-switcher { right:auto; left:26px; }
+        [dir="rtl"] .teacher-table th,[dir="rtl"] .teacher-table td { text-align:right; }
+        [dir="rtl"] .teacher-language-label { padding:0 9px 0 7px; }
+        @media(max-width:800px){ .teacher-language-switcher{bottom:14px;right:14px;left:auto} [dir="rtl"] .teacher-language-switcher{left:14px;right:auto} .teacher-language-label{font-size:10px;padding:0 5px} .teacher-language-btn{padding:7px 9px} }
+        @media(max-width:480px){ .teacher-language-label{display:none} }
+    </style>
+</head>
+<body class="teacher-page">
+<div class="teacher-language-switcher" aria-label="Language selector">
+    <span class="teacher-language-label" data-i18n="language">Language</span>
+    <button class="teacher-language-btn active" data-lang="en">🇬🇧 EN</button>
+    <button class="teacher-language-btn" data-lang="ar">🇸🇦 AR</button>
+    <button class="teacher-language-btn" data-lang="es">🇪🇸 ES</button>
+</div>
+<div class="teacher-wrap">
+    <header class="teacher-top">
+        <div class="teacher-brand">
+            <img src="{{ url_for('static', filename='images/bioquest_logo.jpg') }}" alt="BioQuest">
+            <div>
+                <h1 data-i18n="title">BioQuest Teacher Hub 🧬</h1>
+                <p data-i18n="subtitle">Monitor student progress, points, questions and feedback.</p>
+            </div>
+        </div>
+        <div class="teacher-actions">
+            <span class="teacher-user">👨‍🏫 {{ session['username'] }}</span>
+            <a class="teacher-logout" data-i18n="logout" href="{{ url_for('logout') }}">Log out</a>
+        </div>
+    </header>
+
+    <section class="teacher-stats">
+        <div class="teacher-stat"><span data-i18n="students">Students</span><strong>{{ total_students }}</strong></div>
+        <div class="teacher-stat"><span data-i18n="questionsSolved">Total Questions Solved</span><strong>{{ total_questions_solved }}</strong></div>
+        <div class="teacher-stat"><span data-i18n="totalPoints">Total Points Earned</span><strong>★ {{ total_points }}</strong></div>
+    </section>
+
+    <section class="teacher-panel">
+        <h2 data-i18n="studentProgress">Student Progress</h2>
+        {% if students %}
+        <table class="teacher-table">
+            <thead><tr><th data-i18n="student">Student</th><th data-i18n="grade">Grade</th><th data-i18n="points">Points</th><th data-i18n="questions">Questions</th><th data-i18n="progress">Progress</th><th data-i18n="sections">Sections</th></tr></thead>
+            <tbody>
+            {% for student in students %}
+            <tr>
+                <td><strong>{{ student.username }}</strong></td>
+                <td><span class="grade-badge"><span data-i18n="grade">Grade</span> {{ student.grade }}</span></td>
+                <td>★ {{ student.points }}</td>
+                <td>{{ student.solved }} / {{ total_questions }}</td>
+                <td><span class="progress-track"><span class="progress-fill" style="width:{{ student.percentage }}%"></span></span>{{ student.percentage }}%</td>
+                <td>{{ student.sections_completed }} / 3</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}<div class="empty" data-i18n="noStudents">No students have been added yet.</div>{% endif %}
+    </section>
+
+    <section class="teacher-panel">
+        <h2 data-i18n="recentFeedback">Recent Student Feedback</h2>
+        {% if feedback %}
+        <div class="feedback-grid">
+            {% for item in feedback %}
+            <div class="feedback-item">
+                <strong class="feedback-rating" data-rating="{{ item.rating }}">{{ '😊 Happy' if item.rating == 'happy' else '😐 Neutral' if item.rating == 'neutral' else '😠 Angry' }}</strong>
+                <div>{{ item.username }} · <span class="section-label">{{ item.section_id }}</span></div>
+                <small>{{ item.created_at }}</small>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}<div class="empty" data-i18n="noFeedback">No section feedback has been submitted yet.</div>{% endif %}
+    </section>
+</div>
+
+<script>
+const teacherTranslations = {
+  en: { language:'Language', title:'BioQuest Teacher Hub 🧬', subtitle:'Monitor student progress, points, questions and feedback.', logout:'Log out', students:'Students', questionsSolved:'Total Questions Solved', totalPoints:'Total Points Earned', studentProgress:'Student Progress', student:'Student', grade:'Grade', points:'Points', questions:'Questions', progress:'Progress', sections:'Sections', recentFeedback:'Recent Student Feedback', noStudents:'No students have been added yet.', noFeedback:'No section feedback has been submitted yet.', happy:'Happy', neutral:'Neutral', angry:'Angry', section2:'Section 2', section3:'Section 3', section4:'Section 4' },
+  ar: { language:'اللغة', title:'لوحة تحكم معلم BioQuest 🧬', subtitle:'تابع تقدّم الطلاب والعملات والأسئلة وآراء الطلاب.', logout:'تسجيل الخروج', students:'الطلاب', questionsSolved:'إجمالي الأسئلة المحلولة', totalPoints:'إجمالي العملات المكتسبة', studentProgress:'تقدّم الطلاب', student:'الطالب', grade:'الصف', points:'العملات', questions:'الأسئلة', progress:'التقدّم', sections:'الأقسام', recentFeedback:'آراء الطلاب الأخيرة', noStudents:'لم تتم إضافة أي طلاب بعد.', noFeedback:'لم يتم إرسال أي تقييم للأقسام بعد.', happy:'سعيد', neutral:'محايد', angry:'غاضب', section2:'القسم 2', section3:'القسم 3', section4:'القسم 4' },
+  es: { language:'Idioma', title:'Panel del profesor de BioQuest 🧬', subtitle:'Supervisa el progreso, los puntos, las preguntas y las opiniones de los estudiantes.', logout:'Cerrar sesión', students:'Estudiantes', questionsSolved:'Preguntas resueltas', totalPoints:'Puntos totales obtenidos', studentProgress:'Progreso de los estudiantes', student:'Estudiante', grade:'Curso', points:'Puntos', questions:'Preguntas', progress:'Progreso', sections:'Secciones', recentFeedback:'Comentarios recientes de estudiantes', noStudents:'Aún no se han añadido estudiantes.', noFeedback:'Aún no se ha enviado ninguna opinión de sección.', happy:'Feliz', neutral:'Neutral', angry:'Enfadado', section2:'Sección 2', section3:'Sección 3', section4:'Sección 4' }
+};
+function setTeacherLanguage(lang){
+  const d=teacherTranslations[lang]||teacherTranslations.en;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k]!==undefined)el.textContent=d[k];});
+  document.querySelectorAll('.teacher-language-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.querySelectorAll('.feedback-rating').forEach(el=>{const r=el.dataset.rating; const emoji=r==='happy'?'😊':r==='neutral'?'😐':'😠'; el.textContent=emoji+' '+(d[r]||r);});
+  document.querySelectorAll('.section-label').forEach(el=>{const k=el.textContent.trim(); if(d[k])el.textContent=d[k];});
+  localStorage.setItem('bioquestLanguage',lang);
+  document.title=lang==='ar'?'BioQuest — لوحة المعلم':lang==='es'?'BioQuest — Panel del profesor':'BioQuest — Teacher Dashboard';
+}
+const savedTeacherLanguage=localStorage.getItem('bioquestLanguage')||'en';
+setTeacherLanguage(savedTeacherLanguage);
+document.querySelectorAll('.teacher-language-btn').forEach(btn=>btn.addEventListener('click',()=>setTeacherLanguage(btn.dataset.lang)));
+</script>
+</body>
+</html>

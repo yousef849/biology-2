@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Lesson 1 | BioLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .lesson-page{max-width:1100px;margin:0 auto}.panel{background:#202225;border:1px solid #40444b;border-radius:16px;padding:26px;margin-bottom:20px}.panel h1,.panel h2,.panel h3{color:#fff}.panel p,.panel li{color:#d6d8dc;line-height:1.9}.section-card{margin-top:18px;padding:20px;background:#292b2f;border-radius:12px}.section-card summary{cursor:pointer;color:#8ea1ff;font-weight:bold}.section-card ul{padding-right:24px}.main-button,.submit-button,.next-button{border:0;border-radius:10px;padding:12px 18px;background:#5865f2;color:white;font-weight:bold;cursor:pointer}.main-button:hover,.submit-button:hover{background:#4752c4}.tab-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-button{background:#36393f;color:#ddd;border:1px solid #555;border-radius:10px;padding:10px 14px;cursor:pointer}.tab-button.active{background:#5865f2;color:white}.exam-panel{display:none}.exam-panel.active{display:block}.question-card{background:#303238;border:1px solid #454850;border-radius:13px;padding:20px;margin:16px 0}.question-card h3{margin-top:0}.question-card p{color:#fff;font-size:18px}.option{display:block;background:#393c43;color:#e3e5e8;border-radius:9px;padding:12px;margin:8px 0;cursor:pointer}.option:hover{background:#454954}.option input{margin-left:9px}.hint-box{margin-top:12px;background:#403a29;border-right:4px solid #f0c674;padding:12px;border-radius:8px;color:#f5d98b}.answer-feedback{margin-top:12px;padding:12px;border-radius:8px;font-weight:bold;display:none}.answer-feedback.correct{display:block;background:#173d2c;border-right:4px solid #43d17b;color:#8ff0b2}.answer-feedback.wrong{display:block;background:#482b2b;border-right:4px solid #ed6464;color:#ffb0b0}.option.correct-option{outline:2px solid #43d17b;background:#214b38}.option.wrong-option{outline:2px solid #ed6464}.retry-note{font-weight:normal;margin-top:6px;color:#f5d98b}.result{padding:18px;border-radius:12px;background:#303238;margin-bottom:20px}.passed{border-right:5px solid #43b581}.failed{border-right:5px solid #ed4245}.feedback-item{padding:12px;margin:8px 0;background:#25272b;border-radius:8px;color:#eee}.feedback-item.wrong{border-right:4px solid #f0c674}.back-link{display:inline-block;margin-bottom:18px;color:#8ea1ff}.muted{color:#aaa}.hidden{display:none}.section-counts{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.success-toast{position:fixed;top:24px;left:50%;transform:translate(-50%,-140%);opacity:0;z-index:9999;background:linear-gradient(135deg,#20c997,#00b4d8);color:#fff;padding:18px 28px;border-radius:18px;font-size:18px;font-weight:bold;box-shadow:0 12px 35px rgba(0,0,0,.35);transition:transform .5s ease,opacity .5s ease}.success-toast.show{transform:translate(-50%,0);opacity:1;animation:toastPulse .7s ease}@keyframes toastPulse{0%{scale:.7}70%{scale:1.08}100%{scale:1}}.section-counts span{background:#173d4b;border:1px solid #35e0d0;color:#b9fff6;padding:8px 12px;border-radius:999px;font-weight:bold}.feedback-overlay{position:fixed;inset:0;background:rgba(8,12,20,.72);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;z-index:10000;padding:20px}.feedback-overlay.show{display:flex;animation:feedbackFade .35s ease}.feedback-modal{width:min(520px,100%);background:linear-gradient(145deg,#202a38,#18212d);border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:32px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.55);animation:feedbackPop .45s cubic-bezier(.2,.9,.2,1)}.feedback-modal h2{color:#fff;margin:0 0 10px;font-size:28px}.feedback-modal p{color:#cfd8e3;margin:0 0 24px;font-size:17px}.feedback-options{display:flex;justify-content:center;gap:18px}.feedback-choice{width:125px;min-height:120px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#293545;color:#fff;cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}.feedback-choice:hover{transform:translateY(-8px) scale(1.04);background:#34445a;box-shadow:0 12px 30px rgba(0,0,0,.3)}.feedback-emoji{display:block;font-size:50px;margin-bottom:8px}.feedback-label{font-weight:bold}.feedback-thanks{display:none;color:#fff;font-size:22px;font-weight:bold;padding:25px 0}.continue-learning-btn{margin-top:20px;border:0;border-radius:16px;padding:14px 26px;background:linear-gradient(135deg,#5865f2,#7c4dff);color:#fff;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 10px 25px rgba(88,101,242,.35);transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}.continue-learning-btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 16px 35px rgba(88,101,242,.5);filter:brightness(1.08)}.continue-learning-btn:active{transform:translateY(-1px) scale(.99)}.continue-learning-btn:disabled{opacity:.7;cursor:wait}.feedback-modal.thanks .feedback-options,.feedback-modal.thanks h2,.feedback-modal.thanks>p{display:none}.feedback-modal.thanks .feedback-thanks{display:block;animation:thanksIn .45s ease}@keyframes feedbackFade{from{opacity:0}to{opacity:1}}@keyframes feedbackPop{from{transform:translateY(35px) scale(.88);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}@keyframes thanksIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}@media(max-width:520px){.feedback-options{gap:8px}.feedback-choice{width:100px;min-height:105px}.feedback-emoji{font-size:42px}}
+    </style>
+</head>
+<body>
+<main class="main-content lesson-page">
+    <a class="back-link" href="{{ url_for('grade9') }}">← العودة إلى لوحة الصف التاسع</a>
+
+    <section class="panel lesson-hero">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Isolated%20DNA%20-%20PMG.jpg" alt="DNA photograph">
+        <h1>🧬 الدرس 1: الكيمياء في علم الأحياء</h1>
+        <p>نركّز على الأقسام 2 و3 و4 فقط.</p>
+        <p>اقرأ الأقسام أولاً، ثم اضغط زر الاختبار للانتقال إلى تبويب الأسئلة. الاختبار يحتوي على <strong>60 سؤالاً: 20 سؤالاً لكل قسم</strong>. تحصل على <strong>10 نقاط لكل إجابة صحيحة</strong>، ولا تُمنح النقاط بمجرد القراءة.</p>
+        <button class="main-button" type="button" onclick="showExam()">📝 الانتقال إلى تبويب الأسئلة</button>
+    </section>
+
+    {% if result %}
+    <section class="result {% if result.passed %}passed{% else %}failed{% endif %}">
+        {% if result.passed %}
+            <h2>🎉 أحسنت! اجتزت الاختبار</h2>
+            <p>نتيجتك: {{ result.score }}/{{ result.total }}</p>
+            {% if result.newly_completed %}<p>⭐ تمت إضافة النقاط الخاصة بالإجابات الصحيحة الجديدة إلى حسابك (10 نقاط لكل سؤال).</p>{% else %}<p>هذا الاختبار مكتمل مسبقاً، ولا توجد نقاط إضافية.</p>{% endif %}
+        {% else %}
+            <h2>💪 استمر في المحاولة</h2>
+            <p>نتيجتك: {{ result.score }}/{{ result.total }}. تحتاج إلى {{ result.passing_score }} إجابة صحيحة لاجتياز الاختبار.</p>
+            <p>راجع التلميحات الظاهرة للأسئلة التي أخطأت فيها، ثم أعد الاختبار.</p>
+        {% endif %}
+        {% for item in result.feedback %}
+            <div class="feedback-item {% if not item.correct %}wrong{% endif %}">
+                السؤال {{ item.question_number }}:
+                {% if item.correct %}✅ إجابة صحيحة{% else %}❌ غير صحيحة — 💡 تلميح: {{ item.hint }}{% endif %}
+            </div>
+        {% endfor %}
+        {% if not result.passed %}<button class="main-button" type="button" onclick="showExam()">🔁 إعادة الاختبار</button>{% endif %}
+    </section>
+    {% endif %}
+
+    <section id="study-tab" class="panel">
+        <h2>📚 محتوى الدرس</h2>
+        {% for section in sections %}
+        <details class="section-card">
+            {% if section.id == "section2" %}<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chemical%20reaction.jpg" alt="Chemical reaction" onerror="this.style.display='none'">{% elif section.id == "section3" %}<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Water%20droplet.jpg" alt="Water droplet" onerror="this.style.display='none'">{% else %}<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Isolated%20DNA%20-%20PMG.jpg" alt="DNA" onerror="this.style.display='none'">{% endif %}
+            <summary>القسم {{ section.number }}: {{ section.title }} · {{ section.english }} — <strong>{{ section.question_count }} سؤالاً</strong></summary>
+            <p>{{ section.summary }}</p>
+            <ul>{% for point in section.points %}<li>{{ point }}</li>{% endfor %}</ul>
+            <button class="main-button" type="button" onclick="showExam()">ابدأ الأسئلة من هذا القسم</button>
+        </details>
+        {% endfor %}
+    </section>
+
+    <section id="exam-tab" class="panel exam-panel">
+        <h2>🧠 تبويب الاختبار</h2>
+        <p>اختر القسم للمراجعة، ثم أجب عن 60 سؤالاً، أي 20 سؤالاً لكل قسم. تحصل على 10 نقاط لكل إجابة صحيحة. يمكنك التنقل بين الأقسام، وتُحفظ إجاباتك ونقاطك تلقائياً.</p>
+        <div class="tab-buttons">
+            <button class="tab-button active" type="button" onclick="filterQuestions('all', this)">كل الأسئلة (60)</button>
+            {% for section in sections %}<button class="tab-button" type="button" onclick="filterQuestions('{{ section.id }}', this)">القسم {{ section.number }} ({{ section.question_count }} سؤالاً)</button>{% endfor %}
+        </div>
+        <div id="examForm">
+            {% for question in questions %}
+            <div class="question-card" data-question-id="{{ question.id }}" data-section="{{ question.section_id }}" data-correct="{{ question.answer }}" data-hint="{{ question.hint|e }}">
+                <h3>السؤال {{ question.id }} / 60</h3>
+                <p>{{ question.text }}</p>
+                {% for option in question.options %}
+                <label class="option"><input type="radio" name="question_{{ question.id }}" value="{{ loop.index0 }}"> {{ loop.index }}. {{ option }}</label>
+                {% endfor %}
+                <div class="answer-feedback" aria-live="polite"></div>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="successToast" class="success-toast" role="status" aria-live="polite"></div>
+    </section>
+</main>
+
+<div id="feedbackOverlay" class="feedback-overlay" aria-hidden="true">
+    <div id="feedbackModal" class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+        <h2 id="feedbackTitle">🎉 أنهيت القسم بنجاح!</h2>
+        <p>ما رأيك في الأسئلة في هذا القسم؟ اختر شعورك.</p>
+        <div class="feedback-options">
+            <button class="feedback-choice" type="button" data-rating="happy"><span class="feedback-emoji">😊</span><span class="feedback-label">سعيد</span></button>
+            <button class="feedback-choice" type="button" data-rating="neutral"><span class="feedback-emoji">😐</span><span class="feedback-label">محايد</span></button>
+            <button class="feedback-choice" type="button" data-rating="angry"><span class="feedback-emoji">😠</span><span class="feedback-label">غاضب</span></button>
+        </div>
+        <div id="feedbackStats" class="feedback-stats hidden">
+            <div class="stats-head">📊 أداء هذا القسم</div>
+            <div class="section-overall">
+                <div class="overall-number" id="sectionOverall">0%</div>
+                <div><strong>النسبة الكلية للقسم</strong><small>من أصل 20 سؤالاً</small></div>
+            </div>
+            <div id="attemptBars"></div>
+            <div class="keep-going">🚀 استمر! كل محاولة تقرّبك من إتقان الأحياء.</div>
+            <button id="continueLearningBtn" class="continue-learning-btn" type="button">🚀 متابعة التعلّم</button>
+        </div>
+        <div class="feedback-thanks">💚 شكراً على ملاحظاتك!<br><small>سيتم إعادتك إلى لوحة التحكم...</small></div>
+    </div>
+</div>
+<script>
+function showExam(){
+    document.getElementById('study-tab').style.display='none';
+    document.getElementById('exam-tab').classList.add('active');
+    document.getElementById('exam-tab').scrollIntoView({behavior:'smooth'});
+}
+
+function filterQuestions(section,button){
+    document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
+    button.classList.add('active');
+    document.querySelectorAll('.question-card').forEach(card=>{
+        card.style.display=(section==='all'||card.dataset.section===section)?'block':'none';
+    });
+}
+
+// Immediate correction and automatic 10-coin reward per correct question.
+function showSuccessToast(){
+    const toast=document.getElementById('successToast');
+    toast.textContent='🎉 أحسنت عملاً! تم إضافة 10 عملات إلى حسابك';
+    toast.classList.remove('show');
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    // يبقى الإشعار ظاهراً 3 ثوانٍ ثم يختفي بسلاسة.
+    setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+const feedbackOverlay=document.getElementById('feedbackOverlay');
+const feedbackModal=document.getElementById('feedbackModal');
+let feedbackSectionId=null;
+
+function showSectionFeedback(sectionId){
+    feedbackSectionId=sectionId;
+    feedbackModal.classList.remove('thanks');
+    feedbackOverlay.classList.add('show');
+    feedbackOverlay.setAttribute('aria-hidden','false');
+}
+
+document.querySelectorAll('.feedback-choice').forEach((button)=>{
+    button.addEventListener('click',async()=>{
+        if(!feedbackSectionId)return;
+        document.querySelectorAll('.feedback-choice').forEach(b=>b.disabled=true);
+        try{
+            const response=await fetch('{{ url_for("save_section_feedback") }}',{
+                method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({section_id:feedbackSectionId,rating:button.dataset.rating})
+            });
+            const result=await response.json();
+            if(!result.ok)throw new Error('feedback');
+            renderSectionStats(result.stats);
+            feedbackModal.classList.add('thanks');
+            // لا يتم إغلاق تقرير الأداء تلقائياً. يبقى حتى يضغط الطالب على
+            // زر "متابعة التعلّم" بنفسه.
+        }catch(error){
+            document.querySelectorAll('.feedback-choice').forEach(b=>b.disabled=false);
+        }
+    });
+});
+
+const continueLearningBtn=document.getElementById('continueLearningBtn');
+if(continueLearningBtn){
+    continueLearningBtn.addEventListener('click',()=>{
+        const redirectUrl=continueLearningBtn.dataset.redirect || '{{ url_for("grade9") }}';
+        continueLearningBtn.disabled=true;
+        feedbackModal.classList.add('leaving');
+        feedbackOverlay.classList.remove('show');
+        feedbackOverlay.setAttribute('aria-hidden','true');
+        setTimeout(()=>{ window.location.href=redirectUrl; },220);
+    });
+}
+
+function pctClass(value){
+    if(value>=80)return 'pct-green';
+    if(value>=50)return 'pct-yellow';
+    return 'pct-red';
+}
+function renderSectionStats(stats){
+    const overall=document.getElementById('sectionOverall');
+    overall.textContent=(stats.overall||0)+'%';
+    overall.className='overall-number '+pctClass(stats.overall||0);
+    const labels=[
+        ['first_correct','first_correct_percent','✅ صحيح من أول محاولة'],
+        ['first_wrong','first_wrong_percent','❌ خطأ في أول محاولة'],
+        ['second_correct','second_correct_percent','🎯 صحيح في المحاولة الثانية'],
+        ['second_wrong','second_wrong_percent','↩️ خطأ في المحاولة الثانية'],
+        ['third_correct','third_correct_percent','🔥 صحيح في المحاولة الثالثة'],
+        ['third_wrong','third_wrong_percent','🔁 خطأ في المحاولة الثالثة'],
+        ['fourth_plus_correct','fourth_plus_correct_percent','🏆 صحيح بعد 3 محاولات'],
+        ['fourth_plus_wrong','fourth_plus_wrong_percent','💡 أخطاء بعد 3 محاولات']
+    ];
+    document.getElementById('attemptBars').innerHTML=labels.map(([key,pctKey,label])=>{
+        const pct=stats[pctKey]||0;
+        return `<div class="attempt-row"><div class="attempt-label"><span>${label}</span><strong>${pct}% / 100%</strong></div><div class="attempt-track"><div class="attempt-fill ${pctClass(pct)}" style="width:${pct}%"></div></div></div>`;
+    }).join('');
+    document.getElementById('feedbackStats').classList.remove('hidden');
+}
+
+const solvedQuestionIds = new Set({{ solved_question_ids|tojson }});
+document.querySelectorAll('.question-card').forEach((card)=>{
+    const questionId=Number(card.dataset.questionId);
+    const correctIndex=Number(card.dataset.correct);
+    const baseHint=card.dataset.hint || 'راجع شرح هذا السؤال في محتوى الدرس.';
+    const feedback=card.querySelector('.answer-feedback');
+    const options=Array.from(card.querySelectorAll('input[type="radio"]'));
+    let attempts=0;
+    let solved=solvedQuestionIds.has(questionId);
+    if(solved){
+        feedback.className='answer-feedback correct';
+        feedback.innerHTML='✅ تم حل هذا السؤال مسبقاً.';
+        options.forEach(option=>option.disabled=true);
+    }
+    options.forEach((input)=>input.addEventListener('change',async()=>{
+        if(solved)return;
+        const selected=Number(input.value);
+        options.forEach(option=>option.closest('label').classList.remove('correct-option','wrong-option'));
+        try{
+            const response=await fetch('{{ url_for("check_lesson_answer") }}',{
+                method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({question_id:questionId,answer:selected})
+            });
+            const result=await response.json();
+            if(!result.ok)throw new Error('answer');
+            if(result.correct){
+                solved=true;
+                input.closest('label').classList.add('correct-option');
+                feedback.className='answer-feedback correct';
+                feedback.innerHTML='✅ إجابة صحيحة! أحسنت.';
+                options.forEach(option=>option.disabled=true);
+                if(result.awarded)showSuccessToast();
+                if(result.section_completed && !result.feedback_given)showSectionFeedback(result.section_id);
+            }else{
+                attempts++;
+                input.closest('label').classList.add('wrong-option');
+                const extra=attempts===1?'تذكّر الفكرة الأساسية المذكورة في شرح القسم.':attempts===2?'قارن بين الاختيارات وابحث عن الإجابة التي تطابق تعريف الدرس.':'أعد قراءة النقاط الرئيسية ثم جرّب اختياراً آخر.';
+                feedback.className='answer-feedback wrong';
+                feedback.innerHTML=`❌ إجابة غير صحيحة.<div class="retry-note">💡 تلميح: ${result.hint || baseHint}<br>🔎 ${extra}</div>`;
+            }
+        }catch(error){
+            feedback.className='answer-feedback wrong';
+            feedback.textContent='حدث خطأ مؤقتاً، حاول مرة أخرى.';
+        }
+    }));
+});
+</script>
+</body>
+</html>

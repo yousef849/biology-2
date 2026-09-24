@@ -1,0 +1,1947 @@
+/* =========================================
+   GLOBAL
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #2f3136;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   LOGIN PAGE
+   ========================================= */
+
+.container {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(88, 101, 242, 0.12),
+            transparent 35%
+        ),
+        #2f3136;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+
+    padding: 42px;
+
+    background: #202225;
+
+    border: 1px solid #40444b;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 25px;
+}
+
+.logo-symbol {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #7289ff
+        );
+
+    position: relative;
+
+    box-shadow:
+        0 8px 25px rgba(88, 101, 242, 0.3);
+}
+
+.logo-symbol::before {
+    content: "";
+
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    border: 3px solid white;
+
+    border-radius: 50%;
+
+    top: 15px;
+    left: 15px;
+}
+
+.login-card h1 {
+    text-align: center;
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+
+    color: #b9bbbe;
+
+    font-size: 14px;
+
+    margin-bottom: 30px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-card label {
+    color: #dcddde;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    background: #2f3136;
+
+    border: 1px solid #40444b;
+
+    border-radius: 8px;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+
+    transition: 0.2s;
+}
+
+.login-card input:focus {
+    border-color: #5865f2;
+
+    box-shadow:
+        0 0 0 3px rgba(
+            88,
+            101,
+            242,
+            0.12
+        );
+}
+
+.login-card input::placeholder {
+    color: #72767d;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    padding-right: 48px !important;
+}
+
+#showPassword {
+    position: absolute;
+
+    right: 10px;
+    top: 8px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #b9bbbe;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+#showPassword:hover {
+    color: white;
+}
+
+.options {
+    display: flex;
+
+    align-items: center;
+
+    margin-top: -4px;
+
+    margin-bottom: 20px;
+}
+
+.remember {
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #b9bbbe !important;
+
+    font-weight: normal !important;
+
+    cursor: pointer;
+}
+
+.remember input {
+    accent-color: #5865f2;
+
+    cursor: pointer;
+}
+
+.login-btn {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #5865f2;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    background: #4752c4;
+
+    transform: translateY(-1px);
+}
+
+.account-info {
+    text-align: center;
+
+    color: #72767d;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin-top: 25px;
+}
+
+.error-message {
+    background: rgba(
+        237,
+        66,
+        69,
+        0.12
+    );
+
+    border: 1px solid rgba(
+        237,
+        66,
+        69,
+        0.4
+    );
+
+    color: #ff7678;
+
+    padding: 11px 13px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+
+
+/* =========================================
+   MOVING BIOLOGY QUOTES
+   ========================================= */
+
+.login-scene {
+    position: relative;
+    isolation: isolate;
+}
+
+.quote-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.quote {
+    position: absolute;
+    left: -38%;
+    width: max-content;
+    max-width: 390px;
+    padding: 11px 18px;
+    border: 1px solid rgba(93, 226, 255, 0.20);
+    border-radius: 999px;
+    background: rgba(4, 20, 38, 0.42);
+    box-shadow: 0 0 28px rgba(51, 203, 255, 0.08);
+    color: rgba(218, 247, 255, 0.72);
+    backdrop-filter: blur(7px);
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    animation: quoteDrift 19s linear infinite;
+    transition: opacity .25s ease, transform .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.quote::before {
+    content: '✦';
+    margin-right: 9px;
+    color: #7df5a7;
+    text-shadow: 0 0 10px rgba(125, 245, 167, .75);
+}
+
+.quote-1 { top: 10%; animation-duration: 21s; animation-delay: -4s; }
+.quote-2 { top: 24%; animation-duration: 24s; animation-delay: -15s; }
+.quote-3 { top: 39%; animation-duration: 20s; animation-delay: -8s; }
+.quote-4 { top: 56%; animation-duration: 23s; animation-delay: -17s; }
+.quote-5 { top: 72%; animation-duration: 18s; animation-delay: -10s; }
+.quote-6 { top: 86%; animation-duration: 25s; animation-delay: -21s; }
+
+.quote-field:hover .quote {
+    animation-play-state: paused;
+    opacity: .95;
+}
+
+.quote:hover {
+    transform: scale(1.04);
+    border-color: rgba(93, 226, 255, 0.48);
+    color: #ffffff;
+}
+
+@keyframes quoteDrift {
+    0% {
+        transform: translateX(0) translateY(0);
+        opacity: 0;
+    }
+    8% { opacity: .72; }
+    46% {
+        transform: translateX(78vw) translateY(-8px);
+        opacity: .78;
+    }
+    54% {
+        transform: translateX(82vw) translateY(7px);
+        opacity: .78;
+    }
+    92% { opacity: .68; }
+    100% {
+        transform: translateX(166vw) translateY(-2px);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .quote {
+        max-width: 290px;
+        font-size: 11px;
+        padding: 9px 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quote {
+        animation: none;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: .16;
+    }
+}
+
+/* =========================================
+   DASHBOARD
+   ========================================= */
+
+.dashboard {
+    min-height: 100vh;
+
+    display: flex;
+
+    background: #2f3136;
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.sidebar {
+    width: 245px;
+
+    min-height: 100vh;
+
+    background: #202225;
+
+    border-right: 1px solid #40444b;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 25px 15px;
+
+    flex-shrink: 0;
+}
+
+.sidebar-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    padding: 5px 10px 30px;
+}
+
+.small-logo {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #7289ff
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.small-logo-symbol {
+    width: 15px;
+    height: 15px;
+
+    border: 2px solid white;
+
+    border-radius: 50%;
+}
+
+.sidebar nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.nav-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    color: #b9bbbe;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: #2f3136;
+
+    color: white;
+}
+
+.nav-item.active {
+    background: #5865f2;
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px rgba(
+            88,
+            101,
+            242,
+            0.2
+        );
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.logout {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    color: #b9bbbe;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.logout:hover {
+    background: rgba(
+        237,
+        66,
+        69,
+        0.12
+    );
+
+    color: #ed4245;
+}
+
+
+/* =========================================
+   MAIN DASHBOARD
+   ========================================= */
+
+.main-content {
+    flex: 1;
+
+    padding: 40px 50px;
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+
+.topbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 35px;
+}
+
+.welcome-small {
+    color: #72767d;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 8px;
+}
+
+.topbar h1 {
+    text-align: left;
+
+    font-size: 28px;
+
+    color: white;
+}
+
+.student-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.profile-circle {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #7289ff
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: bold;
+
+    font-size: 16px;
+}
+
+.student-profile strong {
+    display: block;
+
+    color: white;
+
+    font-size: 13px;
+}
+
+.student-profile span {
+    display: block;
+
+    color: #72767d;
+
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   STAT CARDS
+   ========================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 42px;
+}
+
+.stat-card {
+    background: #202225;
+
+    border: 1px solid #40444b;
+
+    border-radius: 12px;
+
+    padding: 21px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    transition: 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #5865f2;
+}
+
+.stat-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+.points-icon {
+    background: rgba(
+        250,
+        166,
+        26,
+        0.12
+    );
+
+    color: #faa61a;
+}
+
+.lesson-icon {
+    background: rgba(
+        88,
+        101,
+        242,
+        0.15
+    );
+}
+
+.progress-icon {
+    background: rgba(
+        67,
+        181,
+        129,
+        0.12
+    );
+
+    color: #43b581;
+}
+
+.stat-card span {
+    display: block;
+
+    color: #72767d;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+.stat-card strong {
+    display: block;
+
+    color: white;
+
+    font-size: 21px;
+}
+
+
+/* =========================================
+   SECTIONS
+   ========================================= */
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 17px;
+}
+
+.section-label {
+    color: #5865f2;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 5px;
+}
+
+.section-title h2 {
+    color: white;
+
+    font-size: 21px;
+}
+
+.view-all {
+    color: #00a8fc;
+
+    font-size: 12px;
+
+    text-decoration: none;
+}
+
+
+/* =========================================
+   BIOLOGY COURSE CARD
+   ========================================= */
+
+.chemistry-card {
+    background:
+        linear-gradient(
+            135deg,
+            #25283a,
+            #202225
+        );
+
+    border: 1px solid #40444b;
+
+    border-radius: 14px;
+
+    padding: 30px;
+
+    display: flex;
+
+    gap: 25px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.chemistry-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -100px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(
+        88,
+        101,
+        242,
+        0.08
+    );
+}
+
+.chemistry-icon {
+    width: 78px;
+    height: 78px;
+
+    flex-shrink: 0;
+
+    border-radius: 16px;
+
+    background: rgba(
+        88,
+        101,
+        242,
+        0.15
+    );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 35px;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.chemistry-info {
+    flex: 1;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.course-tag {
+    color: #7289ff;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+}
+
+.chemistry-info h3 {
+    color: white;
+
+    font-size: 22px;
+
+    margin: 7px 0;
+}
+
+.chemistry-info p {
+    color: #b9bbbe;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    max-width: 650px;
+
+    margin-bottom: 20px;
+}
+
+.course-progress {
+    max-width: 550px;
+
+    margin-bottom: 21px;
+}
+
+.progress-text {
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #72767d;
+
+    font-size: 11px;
+
+    margin-bottom: 7px;
+}
+
+.progress-bar {
+    width: 100%;
+
+    height: 7px;
+
+    background: #2f3136;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #5865f2,
+            #7289ff
+        );
+
+    border-radius: 10px;
+}
+
+.start-btn {
+    padding: 11px 19px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #5865f2;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.start-btn:hover {
+    background: #4752c4;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(
+            88,
+            101,
+            242,
+            0.25
+        );
+}
+
+
+/* =========================================
+   REWARDS
+   ========================================= */
+
+.reward-preview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.reward-card {
+    background: #202225;
+
+    border: 1px solid #40444b;
+
+    border-radius: 11px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    transition: 0.2s;
+}
+
+.reward-card:hover {
+    border-color: #5865f2;
+
+    transform: translateY(-2px);
+}
+
+.reward-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 10px;
+
+    background: #2f3136;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+.reward-card h3 {
+    color: #dcddde;
+
+    font-size: 13px;
+
+    margin-bottom: 4px;
+}
+
+.reward-card p {
+    color: #72767d;
+
+    font-size: 11px;
+}
+
+.reward-points {
+    margin-left: auto;
+
+    color: #faa61a;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 75px;
+
+        padding: 20px 10px;
+    }
+
+    .sidebar-logo span {
+        display: none;
+    }
+
+    .sidebar-logo {
+        justify-content: center;
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .nav-item {
+        justify-content: center;
+
+        font-size: 0;
+    }
+
+    .nav-item span {
+        font-size: 18px;
+    }
+
+    .logout {
+        justify-content: center;
+
+        font-size: 0;
+    }
+
+    .logout span {
+        font-size: 18px;
+    }
+
+    .main-content {
+        padding: 30px 25px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .reward-preview {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .main-content {
+        padding: 25px 16px;
+    }
+
+    .topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+    .topbar h1 {
+        font-size: 23px;
+    }
+
+    .chemistry-card {
+        flex-direction: column;
+
+        padding: 22px;
+    }
+
+    .chemistry-info h3 {
+        font-size: 19px;
+    }
+}
+
+
+/* Biology photography enhancements */
+.login-card { position: relative; overflow: hidden; }
+.login-hero { width: 100%; height: 145px; object-fit: cover; border-radius: 12px; margin-bottom: 22px; border: 1px solid #4b4f59; }
+.dashboard-banner { width: 170px; height: 80px; overflow: hidden; border-radius: 14px; margin-left: 22px; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.dashboard-banner img { width: 100%; height: 100%; object-fit: cover; }
+.topbar { gap: 20px; }
+.chemistry-card { position: relative; overflow: hidden; }
+.course-image { width: 230px; height: 180px; object-fit: cover; border-radius: 12px; margin: 22px; }
+.lesson-hero > img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 14px; margin-bottom: 20px; }
+.section-card > img { width: 100%; max-height: 190px; object-fit: cover; border-radius: 12px; margin-bottom: 14px; }
+@media (max-width: 800px) { .dashboard-banner { display:none; } .course-image { width: calc(100% - 44px); height: 170px; } .topbar { flex-wrap: wrap; } }
+
+/* =========================================
+   ENERGETIC BIOLOGY MOTION THEME
+   ========================================= */
+:root {
+    --bio-cyan: #35e0d0;
+    --bio-green: #8df26b;
+    --bio-purple: #9b7cff;
+    --bio-pink: #ff72c6;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(53,224,208,.13), transparent 28%),
+        radial-gradient(circle at 90% 80%, rgba(155,124,255,.15), transparent 30%),
+        #171a24;
+}
+
+.container {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(53,224,208,.20), transparent 28%),
+        radial-gradient(circle at 80% 75%, rgba(255,114,198,.15), transparent 28%),
+        linear-gradient(135deg, #151927, #24213c);
+}
+
+.login-card, .stat-card, .chemistry-card, .section-card, .reward-card {
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--bio-cyan);
+    box-shadow: 0 20px 70px rgba(53,224,208,.18);
+}
+
+.login-hero, .dashboard-banner img, .course-image, .lesson-hero > img, .section-card > img {
+    animation: biologyDrift 5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.login-hero, .dashboard-banner {
+    position: relative;
+    background: linear-gradient(120deg, rgba(53,224,208,.25), rgba(155,124,255,.25));
+}
+
+.dashboard-banner {
+    animation: bannerFloat 4s ease-in-out infinite;
+}
+
+.login-btn, .button, button[type="submit"] {
+    background: linear-gradient(100deg, var(--bio-cyan), var(--bio-purple), var(--bio-pink));
+    background-size: 220% 220%;
+    animation: gradientPulse 5s ease infinite;
+    color: #10131d;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform .2s ease, filter .2s ease;
+}
+
+.login-btn:hover, .button:hover, button[type="submit"]:hover {
+    transform: translateY(-3px) scale(1.02);
+    filter: brightness(1.12);
+}
+
+.nav-item:hover, .nav-item.active {
+    background: linear-gradient(90deg, rgba(53,224,208,.22), rgba(155,124,255,.20));
+    border-left: 3px solid var(--bio-cyan);
+    color: white;
+}
+
+.stat-card:hover, .chemistry-card:hover, .section-card:hover, .reward-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--bio-cyan);
+    box-shadow: 0 12px 35px rgba(53,224,208,.12);
+}
+
+@keyframes biologyDrift {
+    0%, 100% { transform: translateX(-4px) rotate(-.5deg) scale(1); }
+    50% { transform: translateX(4px) rotate(.5deg) scale(1.025); }
+}
+
+@keyframes bannerFloat {
+    0%, 100% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+}
+
+@keyframes gradientPulse {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+
+/* Final banner layout: show the complete Biology artwork centered */
+.login-hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 145px;
+    max-height: 210px;
+    object-fit: contain;
+    object-position: center center;
+    background: #102f3a;
+    padding: 0;
+}
+.dashboard-banner {
+    width: 260px;
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #102f3a;
+    padding: 0;
+}
+.dashboard-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+}
+
+/* Section performance report */
+.feedback-stats{margin-top:20px;text-align:right;animation:statsRise .5s ease}
+.stats-head{font-size:20px;font-weight:900;color:#fff;margin-bottom:14px;text-align:center}
+.section-overall{display:flex;align-items:center;justify-content:center;gap:15px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:14px;margin-bottom:18px}
+.overall-number{font-size:32px;font-weight:1000;min-width:78px;text-align:center}
+.section-overall small{display:block;color:#aeb9c7;margin-top:3px}
+.pct-green{color:#43e58c}.pct-yellow{color:#ffd166}.pct-red{color:#ff6673}
+.attempt-row{margin:11px 0}.attempt-label{display:flex;justify-content:space-between;gap:10px;color:#e9eef5;font-size:14px;margin-bottom:6px}.attempt-label strong{white-space:nowrap}
+.attempt-track{height:12px;background:#0f1722;border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 2px 5px rgba(0,0,0,.35)}
+.attempt-fill{height:100%;border-radius:999px;transition:width 1s cubic-bezier(.2,.8,.2,1);animation:barGlow 1.2s ease}
+.attempt-fill.pct-green{background:linear-gradient(90deg,#20c997,#43e58c);box-shadow:0 0 14px rgba(67,229,140,.45)}
+.attempt-fill.pct-yellow{background:linear-gradient(90deg,#e9ad2b,#ffd166);box-shadow:0 0 14px rgba(255,209,102,.35)}
+.attempt-fill.pct-red{background:linear-gradient(90deg,#e94f64,#ff6673);box-shadow:0 0 14px rgba(255,102,115,.35)}
+.keep-going{margin-top:18px;padding:13px 15px;border-radius:14px;text-align:center;background:linear-gradient(100deg,rgba(53,224,208,.13),rgba(155,124,255,.13));border:1px solid rgba(53,224,208,.25);color:#dffefa;font-weight:800;animation:keepPulse 2s ease-in-out infinite}
+@keyframes statsRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes barGlow{from{filter:brightness(.7);transform:scaleX(.9);transform-origin:right}to{filter:brightness(1);transform:scaleX(1)}}
+@keyframes keepPulse{0%,100%{box-shadow:0 0 0 rgba(53,224,208,0)}50%{box-shadow:0 0 22px rgba(53,224,208,.14)}}
+
+/* =========================================
+   BIOQUEST LOGIN EXPERIENCE
+   ========================================= */
+.login-page {
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(67, 230, 150, .16), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(43, 183, 255, .18), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(67, 230, 150, .08), transparent 42%),
+        #020b18;
+}
+
+.login-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(72, 220, 170, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(72, 220, 170, .035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at center, black 20%, transparent 78%);
+}
+
+.login-scene {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.bioquest-login-card {
+    width: min(460px, 100%);
+    padding: 34px 40px 28px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(7, 22, 39, .94), rgba(4, 14, 27, .92));
+    border: 1px solid rgba(83, 229, 177, .28);
+    border-radius: 30px;
+    box-shadow:
+        0 35px 90px rgba(0, 0, 0, .55),
+        0 0 55px rgba(47, 211, 168, .10),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+    animation: card-arrive .8s cubic-bezier(.2,.8,.2,1) both;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.bioquest-login-card::before {
+    content: "";
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    top: -145px;
+    right: -95px;
+    background: rgba(48, 214, 171, .13);
+    filter: blur(4px);
+    pointer-events: none;
+}
+
+.bioquest-login-card::after {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    bottom: -145px;
+    left: -80px;
+    background: rgba(44, 165, 255, .12);
+    filter: blur(4px);
+    pointer-events: none;
+}
+
+.bioquest-login-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(83, 229, 177, .5);
+    box-shadow:
+        0 42px 100px rgba(0,0,0,.62),
+        0 0 75px rgba(47, 211, 168, .14),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.brand-logo-wrap {
+    width: 138px;
+    height: 138px;
+    margin: 0 auto 12px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.bioquest-logo {
+    width: 112px;
+    height: 112px;
+    object-fit: cover;
+    border-radius: 28px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 16px 38px rgba(0,0,0,.42);
+    animation: logo-float 4s ease-in-out infinite;
+    transition: transform .3s ease, filter .3s ease;
+}
+
+.brand-logo-wrap:hover .bioquest-logo {
+    transform: scale(1.06) rotate(-2deg);
+    filter: brightness(1.08) saturate(1.1);
+}
+
+.brand-ring {
+    position: absolute;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    border: 1px solid rgba(77, 229, 174, .42);
+    box-shadow: 0 0 30px rgba(77,229,174,.12);
+    animation: ring-spin 9s linear infinite;
+}
+
+.brand-ring::before,
+.brand-ring::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #58e8b2;
+    box-shadow: 0 0 16px #58e8b2;
+}
+
+.brand-ring::before { top: 4px; left: 61px; }
+.brand-ring::after { bottom: 8px; right: 11px; background: #40bfff; box-shadow: 0 0 16px #40bfff; }
+
+.brand-title-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.brand-mini {
+    color: #72dcb8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.8px;
+    white-space: nowrap;
+}
+
+.brand-line {
+    height: 1px;
+    width: 38px;
+    background: linear-gradient(90deg, transparent, rgba(80,225,177,.65));
+}
+
+.brand-line:last-child {
+    background: linear-gradient(90deg, rgba(80,225,177,.65), transparent);
+}
+
+.bioquest-title {
+    text-align: center;
+    font-size: clamp(38px, 8vw, 50px);
+    line-height: 1;
+    margin: 4px 0 7px;
+    letter-spacing: -2px;
+    font-weight: 900;
+    color: #f7ffff;
+    text-shadow: 0 8px 30px rgba(57, 214, 171, .16);
+}
+
+.bioquest-title span {
+    background: linear-gradient(90deg, #52e4ad, #54cfff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.bioquest-tagline {
+    text-align: center;
+    color: #bfeee1;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.bioquest-subtitle {
+    color: #8199aa;
+    margin-bottom: 25px;
+}
+
+.field-group { margin-bottom: 15px; }
+
+.input-shell {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    opacity: .78;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.login-card .input-shell input[type="text"],
+.login-card .input-shell input[type="password"] {
+    margin-bottom: 0;
+    padding: 14px 44px 14px 42px;
+    border-radius: 13px;
+    background: rgba(4, 14, 27, .78);
+    border: 1px solid rgba(115, 147, 165, .22);
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease, background .25s ease;
+}
+
+.login-card .input-shell input:focus {
+    border-color: rgba(74, 226, 176, .72);
+    background: rgba(5, 20, 34, .95);
+    box-shadow: 0 0 0 4px rgba(72, 226, 176, .08), 0 10px 30px rgba(0,0,0,.18);
+    transform: translateY(-1px);
+}
+
+#showPassword {
+    right: 7px;
+    top: 5px;
+    border-radius: 9px;
+    transition: background .2s ease, transform .2s ease;
+}
+
+#showPassword:hover {
+    background: rgba(80, 226, 177, .1);
+    transform: scale(1.06);
+}
+
+.options {
+    margin: 15px 0 18px;
+}
+
+.remember { color: #91a4b1 !important; }
+.remember input { accent-color: #4edfb0; }
+.quest-status {
+    color: #6e8998;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .3px;
+}
+
+.bioquest-login-btn {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px 18px;
+    border-radius: 14px;
+    background: linear-gradient(100deg, #31cf96, #28aeea);
+    box-shadow: 0 12px 30px rgba(44, 203, 157, .22);
+    transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.bioquest-login-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 80%;
+    height: 100%;
+    transform: skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.32), transparent);
+    transition: left .6s ease;
+}
+
+.bioquest-login-btn:hover {
+    transform: translateY(-3px) scale(1.01);
+    filter: brightness(1.08);
+    box-shadow: 0 17px 38px rgba(44, 203, 157, .30);
+}
+
+.bioquest-login-btn:hover::before { left: 140%; }
+
+.bioquest-login-btn strong {
+    font-size: 22px;
+    line-height: 0;
+    transition: transform .2s ease;
+}
+
+.bioquest-login-btn:hover strong { transform: translateX(5px); }
+
+.login-bottom-line {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 22px;
+}
+
+.login-bottom-line span {
+    flex: 1;
+    height: 1px;
+    background: rgba(116, 147, 164, .15);
+}
+
+.login-bottom-line p {
+    color: #607886;
+    font-size: 9px;
+    line-height: 1.45;
+    text-align: center;
+    max-width: 230px;
+}
+
+.login-orbit {
+    position: absolute;
+    border: 1px solid rgba(69, 222, 172, .10);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.orbit-one { width: 520px; height: 520px; top: -260px; left: -260px; animation: orbit-drift 12s ease-in-out infinite; }
+.orbit-two { width: 620px; height: 620px; bottom: -350px; right: -250px; border-color: rgba(65, 188, 255, .10); animation: orbit-drift 15s ease-in-out infinite reverse; }
+.orbit-three { width: 250px; height: 250px; top: 12%; right: 8%; border-color: rgba(78, 226, 176, .07); animation: orbit-pulse 5s ease-in-out infinite; }
+
+.bio-particle {
+    position: absolute;
+    z-index: 2;
+    opacity: .18;
+    font-size: 24px;
+    filter: drop-shadow(0 0 14px rgba(73, 225, 178, .35));
+    pointer-events: none;
+}
+
+.particle-one { left: 9%; top: 23%; animation: particle-float 5s ease-in-out infinite; }
+.particle-two { right: 11%; top: 34%; animation: particle-float 6s ease-in-out infinite 1s; }
+.particle-three { left: 14%; bottom: 18%; animation: particle-float 7s ease-in-out infinite .5s; }
+.particle-four { right: 13%; bottom: 16%; animation: particle-float 5.5s ease-in-out infinite 1.5s; }
+
+@keyframes card-arrive {
+    from { opacity: 0; transform: translateY(24px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-5px) rotate(1deg); }
+}
+
+@keyframes ring-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(18px, -12px) scale(1.04); }
+}
+
+@keyframes orbit-pulse {
+    0%, 100% { opacity: .45; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes particle-float {
+    0%, 100% { transform: translate3d(0,0,0) rotate(-4deg); }
+    50% { transform: translate3d(0,-18px,0) rotate(5deg); }
+}
+
+@media (max-width: 620px) {
+    .bioquest-login-card { padding: 28px 22px 23px; border-radius: 24px; }
+    .brand-logo-wrap { width: 118px; height: 118px; }
+    .bioquest-logo { width: 96px; height: 96px; border-radius: 22px; }
+    .brand-ring { width: 114px; height: 114px; }
+    .brand-ring::before { left: 53px; }
+    .bio-particle { opacity: .10; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bioquest-login-card, .bioquest-logo, .brand-ring, .login-orbit, .bio-particle { animation: none; }
+    .bioquest-login-card:hover { transform: none; }
+}
+
+.login-scene::after {
+    content: "";
+    position: fixed;
+    width: 360px;
+    height: 360px;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(66, 225, 176, .045), transparent 68%);
+    transition: left .12s ease, top .12s ease;
+}
+
+.login-pressed { animation: login-press .28s ease; }
+
+@keyframes login-press {
+    0% { transform: scale(1); }
+    50% { transform: scale(.985); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================
+   BIOQUEST LANGUAGE SWITCHER
+   ========================================= */
+
+.language-switcher {
+    position: fixed;
+    top: 22px;
+    right: 24px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px;
+    border: 1px solid rgba(122, 240, 191, 0.28);
+    border-radius: 18px;
+    background: rgba(5, 17, 35, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 12px 35px rgba(0,0,0,.28), inset 0 0 20px rgba(80,190,255,.05);
+    animation: languageFloat 4s ease-in-out infinite;
+}
+
+.language-label {
+    color: rgba(255,255,255,.72);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    padding: 0 5px 0 8px;
+}
+
+.language-btn {
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(255,255,255,.72);
+    border-radius: 12px;
+    padding: 8px 11px;
+    font-weight: 800;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease;
+}
+
+.language-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    color: white;
+    background: rgba(255,255,255,.08);
+}
+
+.language-btn.active {
+    color: #061226;
+    background: linear-gradient(135deg, #9dff4f, #45d8ff);
+    box-shadow: 0 0 18px rgba(69,216,255,.28), 0 5px 14px rgba(0,0,0,.2);
+}
+
+@keyframes languageFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+[dir="rtl"] .language-switcher {
+    right: auto;
+    left: 24px;
+}
+
+[dir="rtl"] .language-label {
+    padding: 0 8px 0 5px;
+}
+
+@media (max-width: 600px) {
+    .language-switcher {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+        justify-content: center;
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    [dir="rtl"] .language-switcher {
+        left: 12px;
+        right: 12px;
+    }
+
+    .language-label { display: none; }
+}
+
+/* =========================================
+   DASHBOARD LANGUAGE SWITCHER — FLOATING BOTTOM PILL
+   ========================================= */
+.dashboard-language-switcher {
+    position: fixed;
+    bottom: 22px;
+    right: 26px;
+    top: auto;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    border: 1px solid rgba(122, 240, 191, 0.30);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(7, 20, 38, 0.94), rgba(13, 35, 53, 0.90));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 14px 35px rgba(0,0,0,.30), 0 0 24px rgba(69,216,255,.08), inset 0 0 18px rgba(80,190,255,.05);
+    animation: dashboardLanguageFloat 4s ease-in-out infinite;
+}
+
+.dashboard-language-switcher::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(120deg, rgba(157,255,79,.65), rgba(69,216,255,.65), rgba(157,255,79,.35));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: .55;
+}
+
+.dashboard-language-switcher .language-label {
+    color: rgba(255,255,255,.80);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .04em;
+    padding: 0 7px 0 9px;
+    white-space: nowrap;
+}
+
+.dashboard-language-switcher .language-btn {
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(255,255,255,.72);
+    border-radius: 999px;
+    padding: 7px 11px;
+    font-weight: 900;
+    font-size: 11px;
+    cursor: pointer;
+    transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease;
+}
+
+.dashboard-language-switcher .language-btn:hover {
+    transform: translateY(-3px) scale(1.06);
+    color: white;
+    background: rgba(255,255,255,.10);
+    box-shadow: 0 7px 16px rgba(0,0,0,.18);
+}
+
+.dashboard-language-switcher .language-btn:active {
+    transform: translateY(0) scale(.96);
+}
+
+.dashboard-language-switcher .language-btn.active {
+    color: #071525;
+    background: linear-gradient(135deg, #9dff4f, #45d8ff);
+    box-shadow: 0 0 20px rgba(69,216,255,.30), 0 5px 14px rgba(0,0,0,.22);
+}
+
+@keyframes dashboardLanguageFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+[dir="rtl"] .dashboard-language-switcher {
+    right: auto;
+    left: 26px;
+}
+
+[dir="rtl"] .dashboard-language-switcher .language-label {
+    padding: 0 9px 0 7px;
+}
+
+[dir="rtl"] .topbar h1 {
+    text-align: right;
+}
+
+@media (max-width: 800px) {
+    .dashboard-language-switcher {
+        bottom: 14px;
+        right: 14px;
+        left: auto;
+        top: auto;
+        width: auto;
+        margin: 0;
+    }
+
+    [dir="rtl"] .dashboard-language-switcher {
+        left: 14px;
+        right: auto;
+    }
+
+    .dashboard-language-switcher .language-label {
+        display: inline-block;
+        font-size: 10px;
+        padding: 0 5px;
+    }
+
+    .dashboard-language-switcher .language-btn {
+        padding: 7px 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-language-switcher .language-label {
+        display: none;
+    }
+}
+

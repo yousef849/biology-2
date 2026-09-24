@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Grade 9 | Biology</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <nav class="dashboard-language-switcher" aria-label="Language selector">
+        <span class="language-label" data-i18n="language">🌐 LANGUAGE</span>
+        <button class="language-btn" type="button" data-lang="en">EN</button>
+        <button class="language-btn" type="button" data-lang="ar">العربية</button>
+        <button class="language-btn" type="button" data-lang="es">ES</button>
+    </nav>
+
+    <div class="dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <div class="small-logo">
+                    <div class="small-logo-symbol"></div>
+                </div>
+
+                <span>
+                    BioQuest
+                </span>
+
+            </div>
+
+
+            <nav>
+
+                <a
+                    href="#"
+                    class="nav-item active"
+                >
+                    <span>⌂</span>
+                    <span data-i18n="dashboard">Dashboard</span>
+                </a>
+
+
+                <a
+                    href="#biology"
+                    class="nav-item"
+                >
+                    <span>♧</span>
+                    <span data-i18n="biology">Biology</span>
+                </a>
+
+
+                <a
+                    href="#rewards"
+                    class="nav-item"
+                >
+                    <span>★</span>
+                    <span data-i18n="rewards">Rewards</span>
+                </a>
+
+
+                <a
+                    href="#progress"
+                    class="nav-item"
+                >
+                    <span>◈</span>
+                    <span data-i18n="progress">Progress</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a
+                    href="{{ url_for('logout') }}"
+                    class="logout"
+                >
+                    <span>↪</span>
+                    <span data-i18n="logout">Log out</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div class="dashboard-banner">
+                    <img src="{{ url_for('static', filename='images/biology_dashboard_banner.png') }}" alt="Biology banner">
+                </div>
+
+                <div>
+
+                    <p class="welcome-small" data-i18n="studentDashboard">
+                        STUDENT DASHBOARD
+                    </p>
+
+                    <h1 data-i18n="welcomeBack">
+                        Welcome back! 👋
+                    </h1>
+
+                </div>
+
+
+                <div class="student-profile">
+
+                    <div class="profile-circle">
+                        {{ session["username"][0]|upper }}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ session["username"] }}
+                        </strong>
+
+                        <span><span data-i18n="grade">Grade</span> {{ session["grade"] }}</span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- STATS -->
+
+            <section class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon points-icon">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="yourPoints">
+                            Your Points
+                        </span>
+
+                        <strong>
+                            {{ points }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon lesson-icon">
+                        ♧
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="questionsSolved">
+                            Questions Solved
+                        </span>
+
+                        <strong>
+                            {{ completed }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon progress-icon">
+                        %
+                    </div>
+
+                    <div>
+
+                        <span data-i18n="progressLabel">
+                            Progress
+                        </span>
+
+                        <strong>
+                            {{ progress }}%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- BIOLOGY -->
+
+            <section
+                class="section"
+                id="biology"
+            >
+
+                <div class="section-title">
+
+                    <div>
+
+                        <p class="section-label" data-i18n="yourClass">
+                            YOUR CLASS
+                        </p>
+
+                        <h2 data-i18n="grade9Biology">
+                            Grade 9 Biology
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chemistry-card">
+
+                    <img class="course-image" src="https://commons.wikimedia.org/wiki/Special:FilePath/Plant%20cell%20under%20microscope.jpg" alt="Plant cells under microscope">
+
+                    <div class="chemistry-icon">
+                        🧬
+                    </div>
+
+
+                    <div class="chemistry-info">
+
+                        <span class="course-tag" data-i18n="biology">
+                            BIOLOGY
+                        </span>
+
+                        <h3 data-i18n="biologyFundamentals">
+                            Biology Fundamentals
+                        </h3>
+
+                        <p data-i18n="biologyDescription">
+                            Explore cells, living organisms, the human body, ecosystems, and other important Grade 9 biology topics.
+                        </p>
+
+
+                        <div class="course-progress">
+
+                            <div class="progress-text">
+
+                                <span data-i18n="courseProgress">
+                                    Course progress
+                                </span>
+
+                                <span>
+                                    {{ total_percentage }}%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <div
+                                    class="progress-fill"
+                                    style="width: {{ progress }}%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            class="start-btn"
+                            href="{{ url_for('biology_lesson1') }}"
+                            data-i18n="startBiology"
+                        >
+                            Start Biology →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- REWARDS -->
+
+            <section
+                class="section"
+                id="rewards"
+            >
+
+                <div class="section-title">
+
+                    <div>
+
+                        <p class="section-label" data-i18n="rewardsLabel">
+                            REWARDS
+                        </p>
+
+                        <h2 data-i18n="earnRedeem">
+                            Earn & Redeem
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="view-all"
+                        data-i18n="viewAll"
+                    >
+                        View all →
+                    </a>
+
+                </div>
+
+
+                <div class="reward-preview">
+
+
+                    <div class="reward-card">
+
+                        <div class="reward-icon">
+                            🏋️
+                        </div>
+
+                        <div>
+
+                            <h3 data-i18n="gymSubscription">
+                                Gym Subscription
+                            </h3>
+
+                            <p data-i18n="comingSoon">
+                                Coming soon
+                            </p>
+
+                        </div>
+
+                        <span class="reward-points">
+                            1,000 ★
+                        </span>
+
+                    </div>
+
+
+                    <div class="reward-card">
+
+                        <div class="reward-icon">
+                            🎁
+                        </div>
+
+                        <div>
+
+                            <h3 data-i18n="specialPrize">
+                                Special Prize
+                            </h3>
+
+                            <p data-i18n="comingSoon">
+                                Coming soon
+                            </p>
+
+                        </div>
+
+                        <span class="reward-points">
+                            500 ★
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
